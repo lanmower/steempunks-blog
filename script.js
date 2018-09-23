@@ -38,7 +38,7 @@
 
     componentDidMount() {
       const hostIsGithub = (window.location.host == "lanmower.github.io");
-      const username = hostIsGithub?window.location.pathName.replace("/","").replace('.','-'):window.location.host;
+      const username = hostIsGithub?window.location.pathname.replace("/","").replace('.','-'):window.location.host;
       steem.api.getDiscussionsByAuthorBeforeDateAsync(username,null,new Date().toISOString().split('.')[0],1).then(
         (post)=>{this.setState({source: post[0].body, loading:false})}
       )
