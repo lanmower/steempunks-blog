@@ -24,10 +24,10 @@
   });
   const create = React.createElement;
 
-  const iframe = (src, width="768px", height="432px")=>{
+  const iframe = (src, key, width="768px", height="432px")=>{
     return create(
         "iframe",
-        { src, width, height,"frameborder":"0", "allowfullscreen":"true", "webkitallowfullscreen":"true", "mozallowfullscreen":"true"}
+        { src, key, width, height,"frameBorder":"0", "allowFullScreen":true}
       )
  }
   class Index extends React.Component {
@@ -47,18 +47,20 @@
       if(loading) return create(CircularProgress);
       const card = create(
         Paper, {
-          className:classes.page
+          className:classes.page,
+          key:"Paper"
         },
         create("center",
       {},
       [
-      iframe("https://www.vimm.tv/@steempunks-live/embed"),
-      iframe("https://titanembeds.com/embed/367741339393327104"),
+      iframe("https://www.vimm.tv/@steempunks-live/embed", "vid"),
+      iframe("https://titanembeds.com/embed/367741339393327104", "chat"),
       create(
         Typography,
         {
           variant:"subheading",
-          gutterBottom:true
+          gutterBottom:true,
+          key:"body"
         },
         create(
           reactMarkdown, {
@@ -67,7 +69,7 @@
         )
       )
     ]
-    ),
+    )
       )
 
       return create(
@@ -75,7 +77,8 @@
           theme
         },
         [create(
-          CssBaseline
+          CssBaseline,
+          {key:"baseline"}
         ),
         card]
       )
