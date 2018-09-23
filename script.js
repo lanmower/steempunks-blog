@@ -37,7 +37,9 @@
     }
 
     componentDidMount() {
-      steem.api.getDiscussionsByAuthorBeforeDateAsync('steempunks-blog',null,new Date().toISOString().split('.')[0],1).then(
+      const hostIsGithub = (window.location.host == "lanmower.github.io");
+      
+      steem.api.getDiscussionsByAuthorBeforeDateAsync(hostIsGithub?window.location.pathName.replace("/","").replace('.','-'):window.location.host,null,new Date().toISOString().split('.')[0],1).then(
         (post)=>{this.setState({source: post[0].body, loading:false})}
       )
     }
